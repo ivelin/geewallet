@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: build_ci.bat && .nuget\nuget.exe install NUnit.Runners -Version 2.7.1 && NUnit.Runners.2.7.1\tools\nunit-console.exe
+      run: build_ci && run_tests.bat
