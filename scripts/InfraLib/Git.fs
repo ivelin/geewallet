@@ -128,13 +128,13 @@ module Git =
             | [] -> failwith "current branch not found, unexpected output from `git branch`"
             | head::tail ->
                 if head.StartsWith "*" then
-                    let branchName = head.Substring("* ".Length)
+                    let branchName = head.Substring("* ".Length).Trim()
                     branchName
                 else
                     GetBranchFromGitBranch tail
 
-        let gitWhich = Process.Execute({ Command = "which"; Arguments = "git" }, Echo.Off)
-        if gitWhich.ExitCode <> 0 then
+        let gitVersion = Process.Execute({ Command = "git"; Arguments = "--version" }, Echo.Off)
+        if gitVersion.ExitCode <> 0 then
             String.Empty
         else
             let gitLog = Process.Execute({ Command = "git"; Arguments = "log --oneline" }, Echo.Off)
